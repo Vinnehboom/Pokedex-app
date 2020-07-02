@@ -1,5 +1,29 @@
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/*# sourceMappingURL=stylesheet.css.map */
+.body {
+  height: 100vh;
+  display: flex;
+  background-image: url(assets/img/Pokedex.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: sans-serif;
+  color: whitesmoke;
+  flex-wrap: wrap;
+}
+.background {
+  height: 80%;
+  width: 80%;
+  padding: 2vh;
+  border-radius: 25px;
+  display: flex;
+  align-self: center;
+}
+.display {
+  border-radius: 3px;
+  border-color: red;
+}

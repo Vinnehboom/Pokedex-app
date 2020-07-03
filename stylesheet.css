@@ -1,29 +1,215 @@
+@font-face {
+  font-family: "Pixelated";
+  src: url(assets/fonts/pixelated.ttf) format(ttf);
+}
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  font-family: 'VT323', monospace;
+}
+.pokedex-logo {
+  width: 40vw;
+  height: auto;
+  z-index: 1;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: none;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.video-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.info-display {
+  display: flex;
+}
+
+.pokemon-images {
+  width: 300px;
+  height: 300px;
+  background: rgb(250, 248, 248);
+}
+.pokemon-data {
+  width: 300px;
+  height: 300px;
+  background: rgb(250, 249, 249);
+}
+.pokedex-screen {
+  background: none;
+  border: none;
+}
+.search-bar {
+  width: 100%;
+}
+
+.interface {
+  display: flex;
+  align-items: center;
+  background: rgb(207, 25, 25);
+  width: 80vw;
+  height: 75vh;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 25px;
+  margin-bottom: 50px;
+  z-index: 1;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  background: rgb(240, 208, 215);
+  width: 700px;
+  height: 100px;
+  border-radius: 50px;
+  justify-content: space-around;
+}
+
+input[type="text"] {
+  padding: 8px;
+  border-radius: 25px;
+  border-color: red;
+  box-shadow: dimgray;
+}
+
+.search-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.pokeball {
+  height: 70px;
+  width: 70px;
+  padding: 10px;
+}
+.pokeball:hover {
+  transition: 1000ms;
+}
+
+/* input field styling */
+.input {
+  border: 2px solid red;
+  border-radius: 25px;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
   box-sizing: border-box;
 }
 
-.body {
-  height: 100vh;
-  display: flex;
-  background-image: url(assets/img/Pokedex.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-family: sans-serif;
-  color: whitesmoke;
-  flex-wrap: wrap;
-}
-.background {
-  height: 80%;
-  width: 80%;
-  padding: 2vh;
+/* Button styling */
+
+.button {
+  display: inline-flex;
+  height: 40px;
+  width: 150px;
+  border: 2px solid red;
+  margin: 20px 20px 20px 20px;
+  color: #f7857d;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 0.8em;
+  letter-spacing: 1.5px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   border-radius: 25px;
-  display: flex;
-  align-self: center;
+  font-family: "P;
 }
-.display {
-  border-radius: 3px;
-  border-color: red;
+#button-3 {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
 }
+
+#button-3 a {
+  position: relative;
+  transition: all 0.45s ease-Out;
+}
+
+#circle {
+  width: 0%;
+  height: 0%;
+  opacity: 0;
+  line-height: 40px;
+  border-radius: 50%;
+  background: #bfc0c0;
+  position: absolute;
+  transition: all 0.5s ease-Out;
+  top: 20px;
+  left: 70px;
+}
+
+#button-3:hover #circle {
+  width: 200%;
+  height: 500%;
+  opacity: 1;
+  top: -70px;
+  left: -70px;
+}
+
+#button-3:hover a {
+  color: #2d3142;
+}
+
+
+/* Buzz button of pokeball */
+
+@-webkit-keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+@keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+.hvr-buzz {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-buzz:hover,
+.hvr-buzz:focus,
+.hvr-buzz:active {
+  -webkit-animation-name: hvr-buzz;
+  animation-name: hvr-buzz;
+  -webkit-animation-duration: 0.15s;
+  animation-duration: 0.15s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+
+
+
+

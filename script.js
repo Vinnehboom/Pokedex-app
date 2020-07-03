@@ -15,20 +15,22 @@ function mainFetch() {
                 // assign ID variable
                 console.log(data.id);
                 pokeID = data.id;
+                document.getElementById('id-display').innerText = pokeID;
                 // grabbing sprite
                 let spriteArray = data.sprites;
+                let frontSprite;
+                let backSprite;
                 let checkBox = document.getElementById('shiny-check');
                 if (checkBox.checked == true){
-                    let frontSprite = spriteArray['front_shiny'];
-                    let backSprite = spriteArray['back_shiny'];
+                    frontSprite = spriteArray['front_shiny'];
+                    backSprite = spriteArray['back_shiny'];
                 } else {
-                    let frontSprite = spriteArray['front_default'];
-                    let backSprite = spriteArray['back_default'];
+                    frontSprite = spriteArray['front_default'];
+                    backSprite = spriteArray['back_default'];
                 }
-
-
-                document.getElementById('sprite-target').setAttribute('src', sprite);
-                // grabbing name
+            document.getElementById('sprite-target-front').setAttribute('src', frontSprite);
+            document.getElementById('sprite-target-back').setAttribute('src', backSprite);
+             // grabbing name
                 let name = data.name;
                 document.getElementById('name-target').innerText = name.capitalize();
                 // grabbing moves
@@ -43,6 +45,12 @@ function mainFetch() {
                     let randomNr = Math.floor(Math.random() * length);
                     movesToDisplay.push((movesArray[randomNr].move.name).split('-').join(' '));
                 }
+                document.getElementById('moves').innerText = '';
+                document.getElementById('moves').innerHTML += `<ul>`
+                movesToDisplay.forEach(move => {
+                    document.getElementById('moves').innerHTML += `<li>` + move + `</li>` + '\n';
+                })
+                document.getElementById('moves').innerHTML +=`</ul>`
 
                 // fetch types
                 let typeArray = []

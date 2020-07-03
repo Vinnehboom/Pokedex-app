@@ -6,10 +6,13 @@ let pokeID;
 function mainFetch() {
 
     fetch(API).then(res => res.json()).then(data => {
+        console.log(data.pokemon);
         // fetching the pokemon json that contains most of the information we need
         let pokeURL = data.pokemon;
         let pokeName = (document.getElementById('pokemon-search').value).toLowerCase();
         pokeToFetch = pokeURL + pokeName;
+        let checkBox = document.getElementById('shiny-check');
+
         fetch(pokeToFetch).then(res => res.json()).then(data => {
                 console.log(data);
                 // assign ID variable
@@ -20,7 +23,6 @@ function mainFetch() {
                 let spriteArray = data.sprites;
                 let frontSprite;
                 let backSprite;
-                let checkBox = document.getElementById('shiny-check');
                 if (checkBox.checked == true){
                     frontSprite = spriteArray['front_shiny'];
                     backSprite = spriteArray['back_shiny'];
@@ -74,9 +76,10 @@ function mainFetch() {
                     englishFlavorTexts.push(entry['flavor_text']);
                 }
             })
-            let randomFlavortext;
             let randomTextNr = Math.floor(Math.random() * englishFlavorTexts.length);
-            randomFlavortext = englishFlavorTexts[randomTextNr]
+            let randomFlavortext = englishFlavorTexts[randomTextNr]
+            document.getElementById('flavour-text').innerText = randomFlavortext;
+
             // get pokemon genus
             let genusArray = data.genera;
             let englishGenus;
@@ -87,38 +90,51 @@ function mainFetch() {
             })
             let evolutionURL = data['evolution_chain'].url
             // fetching evolution line
-            function getSprites(array) {
-                baseURL = 'https://pokeapi.co/api/v2/pokemon/';
-                spriteArray = [];
-                array.forEach(pokemon => {
-                    fetchURL = baseURL + pokemon;
-                    fetch(fetchURL).then(res => res.json()).then(data =>
-                        {
-                            spriteArray.push(data.sprites.front_default);
-                        }
-                    )
-                })
-                return spriteArray
-            }
+
             fetch(evolutionURL).then(res => res.json()).then(data => {
 
-                evolutionArray = [];
+
+                spriteArray = [];
+
+                function getSprites(array) {
+                    baseURL = 'https://pokeapi.co/api/v2/pokemon/';
+                    array.forEach((pokemon,index) => {
+                        fetchURL = baseURL + pokemon;
+                        console.log(array);
+                        fetch(fetchURL).then(res => res.json()).then(data =>
+                            {
+                                console.log(data);
+                                if (checkBox.checked === true) {
+                                    let spriteURL = data.sprites.front_shiny;
+                                    let targetID = 'sprite-evolution-' + (index+1);
+                                    document.getElementById(targetID).setAttribute('src', spriteURL);
+                                } else {
+                                    let spriteURL = data.sprites.front_default;
+                                    let targetID = 'sprite-evolution-' + (index+1);
+                                    document.getElementById(targetID).setAttribute('src', spriteURL);
+                                }
+
+
+
+                            }
+                        )
+
+                    })
+
+                }
+
+                let evolutionLineArray = [];
                 let dataArray = data.chain;
                 let evolutionLength = dataArray.evolves_to.length;
                 if (evolutionLength === 0) {
                     return
                 } else if (evolutionLength > 1) {
-                    multiEvoArray = [];
                     dataArray.evolves_to.forEach((evolution) => {
-                        multiEvoArray.push(evolution.species.name)
+                        evolutionLineArray.push(evolution.species.name)
                     })
-                    let evolutionLineSprites = getSprites(multiEvoArray);
-                    console.log(multiEvoArray);
-                    console.log(evolutionLineSprites);
                     // normal pokemon evolutions
                 } else {
                     let pokemon1, pokemon2, pokemon3;
-                    let evolutionLineArray = [];
                     if (pokeName === dataArray.species.name && dataArray.evolves_to[0] !== undefined) {
                         pokemon1 = pokeName;
                         evolutionLineArray.push(pokemon1)
@@ -131,10 +147,7 @@ function mainFetch() {
 
                             pokemon3 = dataArray.evolves_to[0].species.name;
                             evolutionLineArray.push(pokemon3)
-                        } else if (dataArray.evolves_to[0] !== undefined && dataArray.evolves_to.length === 1) { }
-                        evolutionLineSprites =  getSprites(evolutionLineArray);
-                        console.log(evolutionLineArray);
-                        console.log(evolutionLineSprites);
+                        }
                     } else if (pokeName === dataArray.evolves_to[0].species.name && dataArray.evolves_to[0] !== undefined) {
                         pokemon2 = pokeName
                         pokemon1 = dataArray.species.name;
@@ -144,27 +157,29 @@ function mainFetch() {
                             pokemon3 = dataArray.evolves_to[0].evolves_to[0].species.name;
                             evolutionLineArray.push(pokemon3);
                         }
-                        evolutionLineSprites =  getSprites(evolutionLineArray);
-                        console.log(evolutionLineArray);
-                        console.log(evolutionLineSprites);
 
                     } else {
                         pokemon3 = pokeName;
                         pokemon2 = dataArray.evolves_to[0].species.name;
                         pokemon1 = dataArray.species.name;
                         evolutionLineArray.push(pokemon1, pokemon2, pokemon3)
-                        evolutionLineSprites =  getSprites(evolutionLineArray);
-                        console.log(evolutionLineArray);
-                        console.log(evolutionLineSprites);
                     }
                 }
+                console.log(evolutionLineArray);
+                getSprites(evolutionLineArray);
+                console.log('this',spriteArray);
 
+                for (let i = 0; i < evolutionSpritesArray.length ; i++) {
+                    console.log(evolutionSpritesArray);
+
+                }
 
             });
 
         })
     })
 }
+
 
 let form = document.querySelector('#my-form');
 

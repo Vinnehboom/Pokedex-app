@@ -24,7 +24,8 @@
       />
       
         <div class="grid-container interface">
-          <div class="search-container">
+          <form id="my-form">
+                 <div class="search-container">
             <div class="search-items-grouped">
               <input
               autocomplete="false"
@@ -33,6 +34,7 @@
             placeholder="Who's that Pokemon?"
             class="search bar"
             id="pokemon-search"
+
           />
           <button class="search-button hvr-buzz" id="submit" >
             <img
@@ -42,30 +44,43 @@
               alt="pokeball"
             />
           </button>
+          <label class="tickbox">Shiny
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
             </div>
-            <div class="button toggle-previous" id="button-3">
+            <div class="button toggle-previous" id="previous-button">
               <div id="circle"></div>
               <a href="#">Previous</a>
             </div>
-            <div class="button toggle-next" id="button-3">
+            <div class="button toggle-next" id="next-button">
               <div id="circle"></div>
               <a href="#">Next</a>
-            </div>
-            
-          <div class="button evolve" id="button-3">
+            </div>   
+          <div class="button evolve" id="evolve-button">
             <div id="circle"></div>
             <a href="#">Evolve!</a>
           </div>
-          <div class="button species" id="button-3">
+          <div class="button species" id="specied-button">
             <div id="circle"></div>
             <a href="#">Species</a>
           </div>
           </div>
+        
+        </form>
+ 
           <div class="pokemon-images">
-            <img id="sprite-target" src="" alt="" />
+            <div class="pokemon-on-display">
+              <img id="sprite-target-front" src="" alt="" />
+            <img id="sprite-target-back" src="" alt="" />
+            </div>  
           </div>
           <div class="pokemon-data">
-            <div id="name-target class=" "></div>
+            <div class="data-points">
+              <div id="name-target class=" "></div>
+              <div id="flavour-text"></div>
+              <div id="moves"></div>
+            </div>      
           </div>
           <div class="zone-1"></div>
           <div class="zone-2"></div>

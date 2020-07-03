@@ -181,14 +181,14 @@ function mainFetch() {
 }
 
 
-let form = document.querySelector('#my-form');
+// let form = document.querySelector('#my-form');
 
 function handleForm(event) {
     event.preventDefault();
     mainFetch();
 }
 
-form.addEventListener('submit', handleForm);
+// form.addEventListener('submit', handleForm);
 document.getElementById('submit').addEventListener('click', handleForm);
 
 String.prototype.capitalize = function () {

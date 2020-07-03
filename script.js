@@ -95,7 +95,6 @@ function mainFetch() {
             fetch(evolutionURL).then(res => res.json()).then(data => {
 
                 evolutionArray = [];
-                console.log(data);
                 let dataArray = data.chain;
                 let evolutionLength = dataArray.evolves_to.length;
                 if (evolutionLength === 0) {
@@ -120,11 +119,11 @@ function mainFetch() {
                             evolutionLineArray.push(pokemon2)
                         }
                         dataArray = dataArray.evolves_to[0];
-                        if (dataArray.evolves_to[0] !== undefined) {
+                        if (dataArray.evolves_to[0] !== undefined && dataArray.evolves_to.length === 1) {
 
                             pokemon3 = dataArray.evolves_to[0].species.name;
                             evolutionLineArray.push(pokemon3)
-                        }
+                        } else if (dataArray.evolves_to[0] !== undefined && dataArray.evolves_to.length === 1) { }
                         evolutionLineSprites =  getSprites(evolutionLineArray);
                         console.log(evolutionLineArray);
                         console.log(evolutionLineSprites);
@@ -167,6 +166,7 @@ function handleForm(event) {
 }
 
 form.addEventListener('submit', handleForm);
+document.getElementById('submit').addEventListener('click', handleForm);
 
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);

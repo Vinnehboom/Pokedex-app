@@ -147,7 +147,13 @@ function mainFetch() {
 
                             pokemon3 = dataArray.evolves_to[0].species.name;
                             evolutionLineArray.push(pokemon3)
+
+                         } else if (dataArray.evolves_to[0] !== undefined && dataArray.evolves_to.length > 1) {
+                            dataArray.evolves_to.forEach((evolution) => {
+                                evolutionLineArray.push(evolution.species.name)
+                            })
                         }
+
                     } else if (pokeName === dataArray.evolves_to[0].species.name && dataArray.evolves_to[0] !== undefined) {
                         pokemon2 = pokeName
                         pokemon1 = dataArray.species.name;
